@@ -11,7 +11,7 @@ const Options = ({ optionType }) => {
     () =>
       axios
         .get(`http://localhost:3030/${optionType}`)
-        .then((response) => setItems[response.data])
+        .then((response) => setItems(response.data))
         .catch((error) => {
           //TODO: handle error response
         }),
@@ -22,7 +22,11 @@ const Options = ({ optionType }) => {
   const ItemComponent = optionType === "scoops" ? ScoopOption : null;
 
   const optionsItems = items.map((item) => (
-    <ItemComponent name={item.name} imagePath={item.imagePath} />
+    <ItemComponent
+      key={item.name}
+      name={item.name}
+      imagePath={item.imagePath}
+    />
   ));
 
   return <Row>{optionsItems}</Row>;
